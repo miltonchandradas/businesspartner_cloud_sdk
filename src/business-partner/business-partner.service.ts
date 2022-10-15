@@ -9,7 +9,7 @@ export class BusinessPartnerService {
   async getAllBusinessPartners(): Promise<BusinessPartner[]> {
     const { businessPartnerApi } = businessPartnerService();
     return await businessPartnerApi.requestBuilder().getAll().execute({
-      url: 'http://localhost:3000/',
+      url: process.env.URL,
     });
   }
 }
