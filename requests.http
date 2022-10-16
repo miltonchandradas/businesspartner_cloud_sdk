@@ -1,0 +1,18 @@
+### GET Business Partner
+GET http://localhost:8080/business-partner/1003764
+
+
+### GET All Business Partners
+GET http://localhost:8080/business-partner
+
+
+### POST Address
+POST http://localhost:8080/business-partner/1003764/address
+Content-Type: application/json
+
+{
+    "postalCode": "14469",
+    "cityName": "Potsdam",
+    "streetName": "Konrad-Zuse-Ring",
+    "houseNumber": "10"
+}

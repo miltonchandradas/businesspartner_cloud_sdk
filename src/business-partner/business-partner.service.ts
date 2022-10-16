@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   businessPartnerService,
   BusinessPartner,
+  BusinessPartnerAddress,
 } from '../../services/business-partner-service';
 
 @Injectable()
@@ -44,6 +45,21 @@ export class BusinessPartnerService {
           businessPartnerAddressApi.schema.HOUSE_NUMBER,
         ),
       )
+      .execute({ url: process.env.URL });
+  }
+
+  createAddress(
+    address: Record<string, any>,
+    businessPartnerId: string,
+  ): Promise<BusinessPartnerAddress> {
+    const { businessPartnerAddressApi } = businessPartnerService();
+
+    const businessPartnerAddress = businessPartnerAddressApi
+      .entityBuilder()
+      .fromJson({ businessPartner: businessPartnerId, ...address });
+    return businessPartnerAddressApi
+      .requestBuilder()
+      .create(businessPartnerAddress)
       .execute({ url: process.env.URL });
   }
 }

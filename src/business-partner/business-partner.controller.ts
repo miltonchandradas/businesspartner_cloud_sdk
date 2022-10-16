@@ -1,5 +1,18 @@
-import { Controller, Get, HttpException, Param } from '@nestjs/common';
-import { BusinessPartner } from '../../services/business-partner-service';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpException,
+  Param,
+  Post,
+} from '@nestjs/common';
+
+import {
+  BusinessPartner,
+  BusinessPartnerAddress,
+} from '../../services/business-partner-service';
+
 import { BusinessPartnerService } from './business-partner.service';
 
 @Controller('business-partner')
@@ -21,5 +34,17 @@ export class BusinessPartnerController {
   @Get('/:id')
   getBusinessPartnerById(@Param('id') id: string): Promise<BusinessPartner> {
     return this.businessPartnerService.getBusinessPartnerById(id);
+  }
+
+  @Post('/:businessPartnerId/address')
+  @HttpCode(201)
+  createAddress(
+    @Body() requestBody: Record<string, any>,
+    @Param('businessPartnerId') businessPartnerId: string,
+  ): Promise<BusinessPartnerAddress> {
+    return this.businessPartnerService.createAddress(
+      requestBody,
+      businessPartnerId,
+    );
   }
 }
