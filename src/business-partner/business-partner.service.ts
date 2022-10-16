@@ -62,4 +62,29 @@ export class BusinessPartnerService {
       .create(businessPartnerAddress)
       .execute({ url: process.env.URL });
   }
+
+  updateAddress(
+    address: Record<string, any>,
+    businessPartnerId: string,
+    addressId: string,
+  ): Promise<BusinessPartnerAddress> {
+    const { businessPartnerAddressApi } = businessPartnerService();
+
+    const businessPartnerAddress = businessPartnerAddressApi
+      .entityBuilder()
+      .fromJson({ businessPartner: businessPartnerId, addressId, ...address });
+    return businessPartnerAddressApi
+      .requestBuilder()
+      .update(businessPartnerAddress)
+      .execute({ url: process.env.URL });
+  }
+
+  deleteAddress(businessPartnerId: string, addressId: string): Promise<void> {
+    const { businessPartnerAddressApi } = businessPartnerService();
+
+    return businessPartnerAddressApi
+      .requestBuilder()
+      .delete(businessPartnerId, addressId)
+      .execute({ url: process.env.URL });
+  }
 }

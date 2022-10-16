@@ -1,11 +1,13 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpException,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 
 import {
@@ -45,6 +47,31 @@ export class BusinessPartnerController {
     return this.businessPartnerService.createAddress(
       requestBody,
       businessPartnerId,
+    );
+  }
+
+  @Put('/:businessPartnerId/address/:addressId')
+  updateBusinessPartnerAddress(
+    @Body() requestBody: Record<string, any>,
+    @Param('businessPartnerId') businessPartnerId: string,
+    @Param('addressId') addressId: string,
+  ): Promise<BusinessPartnerAddress> {
+    return this.businessPartnerService.updateAddress(
+      requestBody,
+      businessPartnerId,
+      addressId,
+    );
+  }
+
+  @Delete('/:businessPartnerId/address/:addressId')
+  @HttpCode(204)
+  deleteBusinessPartnerAddress(
+    @Param('businessPartnerId') businessPartnerId: string,
+    @Param('addressId') addressId: string,
+  ): Promise<void> {
+    return this.businessPartnerService.deleteAddress(
+      businessPartnerId,
+      addressId,
     );
   }
 }

@@ -16,3 +16,16 @@ Content-Type: application/json
     "streetName": "Konrad-Zuse-Ring",
     "houseNumber": "10"
 }
+
+
+### PUT Address
+PUT http://localhost:8080/business-partner/1003764/address/28238
+Content-Type: application/json
+
+{
+    "houseNumber": "12345"
+}
+
+
+### DELETE Address
+DELETE http://localhost:8080/business-partner/1003764/address/28238
