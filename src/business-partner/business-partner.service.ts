@@ -15,7 +15,9 @@ export class BusinessPartnerService {
         businessPartnerApi.schema.BUSINESS_PARTNER,
         businessPartnerApi.schema.FIRST_NAME,
         businessPartnerApi.schema.LAST_NAME,
+        businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY,
       )
+      .filter(businessPartnerApi.schema.BUSINESS_PARTNER_CATEGORY.equals('1'))
       .top(10)
       .execute({
         url: process.env.URL,
