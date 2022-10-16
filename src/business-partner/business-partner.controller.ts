@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException } from '@nestjs/common';
+import { Controller, Get, HttpException, Param } from '@nestjs/common';
 import { BusinessPartner } from '../../services/business-partner-service';
 import { BusinessPartnerService } from './business-partner.service';
 
@@ -16,5 +16,10 @@ export class BusinessPartnerController {
           500,
         );
       });
+  }
+
+  @Get('/:id')
+  getBusinessPartnerById(@Param('id') id: string): Promise<BusinessPartner> {
+    return this.businessPartnerService.getBusinessPartnerById(id);
   }
 }
